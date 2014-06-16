@@ -63,7 +63,7 @@ char callsign[9] = "UAVA";  // MAX 9 CHARACTERS!!
 
 
 #define POWERSAVING
-#define ONE_SECOND F_CPU / 1024 / 16
+#define ONE_SECOND F_CPU / 1024 / 8
 
 SoftwareSerial MTX2_EN(12, RADIO_ENABLE); // RX, TX
 
