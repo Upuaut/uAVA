@@ -39,8 +39,8 @@
 
 /* BITS YOU WANT TO AMEND */
 
-#define MTX2_FREQ 434.150 // format 434.XXX  
-char callsign[9] = "UAVA";  // MAX 9 CHARACTERS!!
+#define MTX2_FREQ 434.475 // format 434.XXX  
+char callsign[9] = "UAR";  // MAX 9 CHARACTERS!!
 
 /* BELOW HERE YOU PROBABLY DON'T WANT TO BE CHANGING STUFF */
 
