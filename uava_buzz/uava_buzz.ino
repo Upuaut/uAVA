@@ -39,8 +39,8 @@
 
 /* BITS YOU WANT TO AMEND */
 
-#define MTX2_FREQ 434.485 // format 434.XXX  
-char callsign[9] = "VK5QI-3";  // MAX 9 CHARACTERS!!
+#define MTX2_FREQ 434.600 // format 434.XXX  
+char callsign[9] = "BUZZ";  // MAX 9 CHARACTERS!!
 
 /* BELOW HERE YOU PROBABLY DON'T WANT TO BE CHANGING STUFF */
 
@@ -59,7 +59,7 @@ char callsign[9] = "VK5QI-3";  // MAX 9 CHARACTERS!!
 #define BATTERY_ADC A0
 #define RTTY_SHIFT 425        
 #define RADIO_TXD 9
-#define RADIO_ENABLE 2
+#define RADIO_ENABLE A1
 
 
 #define POWERSAVING
@@ -303,7 +303,7 @@ void rtty_txbit (int bit)
 {
   if (bit)
   {
-    analogWrite(RADIO_TXD, 100+(RTTY_SHIFT/7)); // High
+    analogWrite(RADIO_TXD, 100+(RTTY_SHIFT/6)); // High
   }
   else
   {

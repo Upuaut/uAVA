@@ -39,8 +39,8 @@
 
 /* BITS YOU WANT TO AMEND */
 
-#define MTX2_FREQ 434.485 // format 434.XXX  
-char callsign[9] = "VK5QI-3";  // MAX 9 CHARACTERS!!
+#define MTX2_FREQ 434.600 // format 434.XXX  
+char callsign[9] = "BUZZ";  // MAX 9 CHARACTERS!!
 
 /* BELOW HERE YOU PROBABLY DON'T WANT TO BE CHANGING STUFF */
 
@@ -54,12 +54,12 @@ char callsign[9] = "VK5QI-3";  // MAX 9 CHARACTERS!!
 #define STOPBITS 2       // Either 1 or 2
 #define TXDELAY 0        // Delay between sentence TX's
 #define RTTY_BAUD 50     // RTTY Baud rate (Recommended = 50)
-#define LED_WARN 5
-#define LED_OK 6
+#define LED_WARN 2
+
 #define BATTERY_ADC A0
 #define RTTY_SHIFT 425        
 #define RADIO_TXD 9
-#define RADIO_ENABLE 2
+#define RADIO_ENABLE 6
 
 
 #define POWERSAVING
@@ -110,7 +110,6 @@ unsigned long startTime;
 void setup()  { 
   pinMode(RADIO_TXD, OUTPUT);
   pinMode(LED_WARN, OUTPUT);
-  pinMode(LED_OK,OUTPUT);
   pinMode(BATTERY_ADC, INPUT);
   setMTX2Frequency();
   Serial.begin(9600);
@@ -207,7 +206,6 @@ ISR(TIMER2_COMPA_vect)
   if(alt>1000 && sats >= 4)
   {
     digitalWrite(LED_WARN,LOW);  
-    digitalWrite(LED_OK,LOW);  
   }
   else 
   {
@@ -218,11 +216,9 @@ ISR(TIMER2_COMPA_vect)
       if(errorstatus!=8)
       {
         digitalWrite(LED_WARN,!digitalRead(LED_WARN));
-        digitalWrite(LED_OK,LOW);  
       }
       else 
       {
-        digitalWrite(LED_OK, !digitalRead(LED_OK)); 
         digitalWrite(LED_WARN,LOW);    
       }
     }
@@ -303,7 +299,7 @@ void rtty_txbit (int bit)
 {
   if (bit)
   {
-    analogWrite(RADIO_TXD, 100+(RTTY_SHIFT/7)); // High
+    analogWrite(RADIO_TXD, 100+(RTTY_SHIFT/6)); // High
   }
   else
   {

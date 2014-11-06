@@ -83,8 +83,8 @@ unsigned char PROGMEM varicode[][3] = {
 //#define BAUDRATE 15.625	// DominoEX16
 //#define DOMEXSPACING 0x4B // EX4  
 //#define DOMEXSPACING 0x96 // EX8  OK
-//#define DOMEXSPACING 0x96 // EX16 OK 
-#define DOMEXSPACING 0xCF // EX22 OK
+#define DOMEXSPACING 0x96 // EX16 OK 
+//#define DOMEXSPACING 0xCF // EX22 OK
 #define LED_WARN 5
 #define LED_OK 6
 #define BATTERY_ADC A0
@@ -298,8 +298,8 @@ void initialise_interrupt()
   TCCR1A = 0;     // set entire TCCR1A register to 0
   TCCR1B = 0;     // same for TCCR1B
   //  OCR1A = F_CPU / 1024 / BAUDRATE - 1;  // set compare match register to desired timer count:
-  //	OCR1A = F_CPU/16000-1; // DOMINOEX16
-  OCR1A = F_CPU/22050-1; // DOMINOEX22
+  OCR1A = F_CPU/16000-1; // DOMINOEX16
+  //OCR1A = F_CPU/22050-1; // DOMINOEX22
   //	OCR1A = F_CPU/8000-1; // DOMINOEX8
   //	OCR1A = F_CPU/4000-1; // DOMINOEX4
   TCCR1B |= (1 << WGM12);   // turn on CTC mode:
