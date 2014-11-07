@@ -40,7 +40,7 @@
 /* BITS YOU WANT TO AMEND */
 
 #define MTX2_FREQ 434.600 // format 434.XXX  
-char callsign[9] = "BUZZ";  // MAX 9 CHARACTERS!!
+char callsign[9] = "UAVA";  // MAX 9 CHARACTERS!!
 
 /* BELOW HERE YOU PROBABLY DON'T WANT TO BE CHANGING STUFF */
 
@@ -336,6 +336,8 @@ void setupGPS() {
     }
 
   }
+  wait(500);
+  setGPS_GNSS();
   wait(500);
   setGPS_DynamicModel6();
   wait(500);
@@ -786,7 +788,26 @@ void setMTX2Frequency()
   delay(50);
   MTX2_EN.end();
 }
-
+void setGPS_GNSS()
+{
+	// Sets CFG-GNSS to disable everything other than GPS GNSS
+	// solution. Failure to do this means GPS power saving 
+	// doesn't work. Not needed for MAX7, needed for MAX8's
+  int gps_set_sucess=0;
+  uint8_t setgnss[] = {
+	0xB5, 0x62, 0x06, 0x3E, 0x2C, 0x00, 0x00, 0x00,
+	0x20, 0x05, 0x00, 0x08, 0x10, 0x00, 0x01, 0x00,
+	0x01, 0x01, 0x01, 0x01, 0x03, 0x00, 0x00, 0x00,
+	0x01, 0x01, 0x03, 0x08, 0x10, 0x00, 0x00, 0x00,
+	0x01, 0x01, 0x05, 0x00, 0x03, 0x00, 0x00, 0x00,
+	0x01, 0x01, 0x06, 0x08, 0x0E, 0x00, 0x00, 0x00,
+	0x01, 0x01, 0xFC, 0x11 };
+  while(!gps_set_sucess)
+  {
+    sendUBX(setgnss, sizeof(setgnss)/sizeof(uint8_t));
+    gps_set_sucess=getUBX_ACK(setgnss);
+  }
+}
 
 
 
